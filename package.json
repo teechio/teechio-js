@@ -1,0 +1,16 @@
+{
+    "name": "teech.io",
+    "description": "JavaScript development kit for teech.io",
+    "url": "https://github.com/teechio/javascript-kit",
+    "keywords": ["teech", "teech.io", "educational", "backend", "api"],
+    "version": "0.5.0",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-qunit": "~0.3.0",
+        "grunt-contrib-clean": "~0.5.0",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-uglify": "~0.2.2"
+    },
+    "main": "dist/teech.io",
+    "private": true
+}
