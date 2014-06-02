@@ -1,7 +1,7 @@
 (function(Teechio) {
 
-	var apiKey = "cccLK40rRAt7uS0yD6GpaUXjKpEC1ZIF2GhuS9lb",
-		applicationId = "ImSbq19yrEs83JaMbBAI5m8KugUdwRzz";
+	var apiKey = "YOUR API KEY",
+		applicationId = "YOUR APPLICATION ID";
 
 	module("Teech.io JS SDK tests");
 
