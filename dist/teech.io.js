@@ -3192,11 +3192,6 @@ define(function (require) {
 			return teechio.Object.prototype.save.call(this, this.route, null, 'POST', this.attributes);
 		};
 
-		assignment.addAssessment = function(assessmentID, assignmentID) {
-			this.attributes.assessment = assignmentID;
-			return teechio._request(this.route, assignmentID, 'PUT', this.attributes.assessment);
-		};
-
 		return assignment;
 	};
 
@@ -3216,7 +3211,7 @@ define(function (require) {
 			return teechio.Object.prototype.save.call(this, this.route, null, 'POST', this.attributes);
 		};
 
-		submission.score = function(id, score) {
+		submission.grade = function(id, score) {
 			this.attributes.score = score;
 			return teechio._request(this.route + '/' + id + '/score', null, 'PUT', this.attributes.score);
 		};
