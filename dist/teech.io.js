@@ -3063,22 +3063,6 @@ define(function (require) {
 	};
 
 	teechio.Object.prototype = {
-		query: function(query, sort, limit, skip) {
-			var queryString = '?';
-			if(query)
-				queryString += 'query=' + JSON.stringify(query) + '&';
-			if(sort) {
-				var ccsort = (typeof sort === 'object') ? JSON.stringify(sort) : sort;
-				queryString += 'sort=' + ccsort + '&';
-			}
-			if(limit)
-				queryString += 'limit=' + limit + '&';
-			if(skip)
-				queryString += 'skip=' + skip + '&';
-			queryString = queryString.substring(0, queryString.length-1);
-			return teechio._request(this.route + queryString, null, 'GET', {});
-		},
-
 		fetchAll: function() {
 			return teechio._request(this.route, null, 'GET', {});
 		},
@@ -3102,6 +3086,41 @@ define(function (require) {
 		toString: function() {
 			return JSON.stringify(this.attributes);
 		}
+	};
+
+	/**
+	 * [Query description]
+	 * @param {[type]} endpoint [description]
+	 */
+	teechio.Query = function(endpoint) {
+		var query = new teechio.Object({}, endpoint + '/?');
+
+		query.search = function(constraints) {
+			this.route = 'query=' + JSON.stringify(constraints) + '&';
+			return this;
+		};
+
+		query.sort = function(key) {
+			this.route = (typeof sort === 'object') ? JSON.stringify(key) : key;
+			return this;
+		};
+
+		query.limit = function(items) {
+			this.route = 'limit=' + items + '&';
+			return this;
+		};
+
+		query.skip = function(items) {
+			this.route = 'limits=' + items + '&';
+			return this;
+		};
+
+		query.get = function() {
+			var route = this.route.substring(0, this.route.length-1);
+			return teechio._request(route, null, 'GET', {});
+		};
+
+		return query;
 	};
 
 	/**
