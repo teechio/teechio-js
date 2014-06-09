@@ -145,6 +145,41 @@
 	};
 
 	/**
+	 * [Query description]
+	 * @param {[type]} endpoint [description]
+	 */
+	teechio.Query = function(endpoint) {
+		var query = new teechio.Object({}, endpoint + '/?');
+
+		query.search = function(constraints) {
+			this.route = 'query=' + JSON.stringify(constraints) + '&';
+			return this;
+		};
+
+		query.sort = function(key) {
+			this.route = (typeof sort === 'object') ? JSON.stringify(key) : key;
+			return this;
+		};
+
+		query.limit = function(items) {
+			this.route = 'limit=' + items + '&';
+			return this;
+		};
+
+		query.skip = function(items) {
+			this.route = 'limits=' + items + '&';
+			return this;
+		};
+
+		query.get = function() {
+			var route = this.route.substring(0, this.route.length-1);
+			return teechio._request(route, null, 'GET', {});
+		};
+
+		return query;
+	};
+
+	/**
 	 * [User description]
 	 * @param {[type]} attributes [description]
 	 */
