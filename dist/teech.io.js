@@ -3063,6 +3063,22 @@ define(function (require) {
 	};
 
 	teechio.Object.prototype = {
+		query: function(query, sort, limit, skip) {
+			var queryString = '?';
+			if(query)
+				queryString += 'query=' + JSON.stringify(query) + '&';
+			if(sort) {
+				var ccsort = (typeof sort === 'object') ? JSON.stringify(sort) : sort;
+				queryString += 'sort=' + ccsort + '&';
+			}
+			if(limit)
+				queryString += 'limit=' + limit + '&';
+			if(skip)
+				queryString += 'skip=' + skip + '&';
+			queryString = queryString.substring(0, queryString.length-1);
+			return teechio._request(this.route + queryString, null, 'GET', {});
+		},
+
 		fetchAll: function() {
 			return teechio._request(this.route, null, 'GET', {});
 		},
